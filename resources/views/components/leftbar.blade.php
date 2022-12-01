@@ -34,7 +34,7 @@
                 </li>
                 <li class="sidebar-dropdown">
                     <a href="#" class="aheader">
-                        <i class="icon-users"></i>
+                        <i class="icon-activity"></i>
                         <span class="menu-text">Medicine</span>
                     </a>
                     <div class="sidebar-submenu">

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MedicineController;
@@ -38,6 +39,17 @@ Route::post("/medicine/bulk-action", [MedicineController::class, 'bulk_action'])
 Route::get("/stock", [StockController::class, 'index'])->name("stock.index");
 Route::post("/stock/update", [StockController::class, 'update'])->name("stock.update");
 Route::get("/stock/view/{id}", [StockController::class, 'view'])->name("stock.view");
+
+//Order Routes
+Route::get("/order", [OrderController::class, 'index'])->name("order.index");
+Route::get("/order/create", [OrderController::class, 'create'])->name("order.create");
+Route::post("/order", [OrderController::class, 'store'])->name("order.store");
+Route::get("/order/edit/{id}", [OrderController::class, 'edit'])->name("order.edit");
+Route::post("/order/update", [OrderController::class, 'update'])->name("order.update");
+Route::get("/order/trash-list", [OrderController::class, 'trash_list'])->name("order.trash_list");
+Route::post("/order/trash", [OrderController::class, 'trash'])->name("order.trash");
+Route::post("/order/bulk-action", [OrderController::class, 'bulk_action'])->name("order.bulk_action");
+
 
 View::composer(['components.leftbar', 'components.meta'], function ($views) {
     $allSetting = Setting::first();
