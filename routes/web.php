@@ -11,7 +11,15 @@ Route::get('/', [BaseController::class, 'index'])->name('home');
 Route::get('/setting', [BaseController::class, 'setting'])->name('setting');
 Route::post('/setting-update', [BaseController::class, 'update'])->name('setting.update');
 
-
+//Customers Routes
+Route::get("/customer", [CustomerController::class, 'index'])->name("customer.index");
+Route::get("/customer/create", [CustomerController::class, 'create'])->name("customer.create");
+Route::post("/customer", [CustomerController::class, 'store'])->name("customer.store");
+Route::get("/customer/edit/{id}", [CustomerController::class, 'edit'])->name("customer.edit");
+Route::post("/customer/update", [CustomerController::class, 'update'])->name("customer.update");
+Route::get("/customer/trash-list", [CustomerController::class, 'trash_list'])->name("customer.trash_list");
+Route::post("/customer/trash", [CustomerController::class, 'trash'])->name("customer.trash");
+Route::post("/customer/bulk-action", [CustomerController::class, 'bulk_action'])->name("customer.bulk_action");
 
 
 View::composer(['components.leftbar', 'components.meta'], function ($views) {
