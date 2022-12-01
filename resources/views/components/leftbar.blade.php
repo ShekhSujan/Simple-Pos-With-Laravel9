@@ -47,7 +47,7 @@
                 </li>
                 <li class="sidebar-dropdown">
                     <a href="#" class="aheader">
-                        <i class="icon-activity"></i>
+                        <i class="icon-archive1"></i>
                         <span class="menu-text">Order</span>
                     </a>
                     <div class="sidebar-submenu">
