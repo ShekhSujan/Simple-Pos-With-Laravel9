@@ -45,6 +45,18 @@
                         </ul>
                     </div>
                 </li>
+                <li class="sidebar-dropdown">
+                    <a href="#" class="aheader">
+                        <i class="icon-activity"></i>
+                        <span class="menu-text">Order</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li><a href="{{ route('order.create') }}" class="bheader">New Order</a></li>
+                            <li><a href="{{ route('order.index') }}" class="bheader">Order List</a></li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li class="sidebar">
                     <a href="{{route('setting')}}" class="aheader">
