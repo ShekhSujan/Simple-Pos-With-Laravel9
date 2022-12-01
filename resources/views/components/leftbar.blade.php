@@ -27,23 +27,25 @@
                     </a>
                     <div class="sidebar-submenu">
                         <ul>
-                            <li><a href="{{ route('customer.create') }}" class="bheader">New User</a></li>
-                            <li><a href="{{ route('customer.index') }}" class="bheader">All User</a></li>
+                            <li><a href="{{ route('customer.create') }}" class="bheader">New Customer</a></li>
+                            <li><a href="{{ route('customer.index') }}" class="bheader">All Customer</a></li>
                         </ul>
                     </div>
                 </li>
-                <li class="sidebar">
+                <li class="sidebar-dropdown">
                     <a href="#" class="aheader">
-                        <i class="icon-check-circle"></i>
-                        <span class="menu-text">Create</span>
+                        <i class="icon-users"></i>
+                        <span class="menu-text">Medicine</span>
                     </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li><a href="{{ route('medicine.create') }}" class="bheader">New Medicine</a></li>
+                            <li><a href="{{ route('medicine.index') }}" class="bheader">All Medicine</a></li>
+                            <li><a href="{{ route('stock.index') }}" class="bheader">Medicine Stock</a></li>
+                        </ul>
+                    </div>
                 </li>
-                <li class="sidebar">
-                    <a href="#" class="aheader">
-                        <i class="icon-layout"></i>
-                        <span class="menu-text">List</span>
-                    </a>
-                </li>
+
                 <li class="sidebar">
                     <a href="{{route('setting')}}" class="aheader">
                         <i class="icon-settings1"></i>
