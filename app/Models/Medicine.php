@@ -19,4 +19,7 @@ class Medicine extends Model
         'company',
         'status',
     ];
+    const isInActive = 0;
+    const isActive = 1;
+    const isTrash = 2;
 }

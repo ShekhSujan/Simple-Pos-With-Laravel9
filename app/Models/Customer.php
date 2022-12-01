@@ -16,5 +16,7 @@ class Customer extends Model
         'address',
         'status',
     ];
-
+    const isInActive = 0;
+    const isActive = 1;
+    const isTrash = 2;
 }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', [BaseController::class, 'index'])->name('home');
 Route::get('/setting', [BaseController::class, 'setting'])->name('setting');

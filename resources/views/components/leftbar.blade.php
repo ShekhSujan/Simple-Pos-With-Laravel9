@@ -20,6 +20,18 @@
     <div class="sidebar-content">
         <div class="sidebar-menu NavScroll">
             <ul>
+                <li class="sidebar-dropdown">
+                    <a href="#" class="aheader">
+                        <i class="icon-users"></i>
+                        <span class="menu-text">Customers</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li><a href="{{ route('customer.create') }}" class="bheader">New User</a></li>
+                            <li><a href="{{ route('customer.index') }}" class="bheader">All User</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <li class="sidebar">
                     <a href="#" class="aheader">
                         <i class="icon-check-circle"></i>
