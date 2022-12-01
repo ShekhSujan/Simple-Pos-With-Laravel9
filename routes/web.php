@@ -6,11 +6,12 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\InvoiceController;
 
 Route::get('/', [BaseController::class, 'index'])->name('home');
 Route::get('/setting', [BaseController::class, 'setting'])->name('setting');
 Route::post('/setting-update', [BaseController::class, 'update'])->name('setting.update');
+
+
 
 
 View::composer(['components.leftbar', 'components.meta'], function ($views) {

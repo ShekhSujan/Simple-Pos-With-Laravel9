@@ -16,11 +16,10 @@ return new class extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
-            $table->string('product');
-            $table->string('serial_no');
-            $table->float('amount', 10, 2);
-            $table->float('unit_price', 10, 2);
-            $table->smallInteger('single_qty');
+            $table->foreignId('medicine_id')->constrained()->cascadeOnDelete();
+            $table->smallInteger('qty');
+            $table->float('price', 10, 2);
+            $table->float('total', 10, 2);
             $table->timestamps();
         });
     }
