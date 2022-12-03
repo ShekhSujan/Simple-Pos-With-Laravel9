@@ -12,7 +12,7 @@
                 <div class="card m-0">
                     <div class="card-body">
 
-                        <form action="{{ route('order.store') }}" method="post">
+                        <form  action="{{ route('order.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <div class="input-group">
@@ -54,7 +54,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6" class="text-right border-right">
-                                            <button type="submit" class="btn btn-primary btn-sm">Checkout</button>
+                                            <button type="submit" class="btn btn-primary btn-sm" id="checkout">Checkout</button>
                                             <button class="clear-cart btn btn-danger btn-sm">Clear Cart</button>
                                         </td>
                                     </tr>
@@ -79,7 +79,8 @@
                                 @foreach ($allMedicine as $key => $value)
                                     <tr>
                                         <td>{{ $value->title }}</td>
-                                        <td>${{ $value->unit_price }} / <span class="badge badge-danger">{{ $value->stock }}</span></td>
+                                        <td>${{ $value->unit_price }} / <span
+                                                class="badge badge-danger">{{ $value->stock }}</span></td>
                                         <td><a href="#" class="btn btn-primary btn-sm add-to-cart"
                                                 data-name="{{ $value->title }}" data-id='{{ $value->id }}'
                                                 data-price='{{ $value->unit_price }}'>Add</a>

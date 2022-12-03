@@ -53,7 +53,7 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li><a href="{{ route('order.create') }}" class="bheader">New Order</a></li>
-                            <li><a href="{{ route('order.index') }}" class="bheader">Order List</a></li>
+
                         </ul>
                     </div>
                 </li>
