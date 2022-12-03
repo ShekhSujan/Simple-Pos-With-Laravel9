@@ -17,9 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained()->cascadeOnDelete();
             $table->float('total', 10, 2);
-            $table->float('tax', 10, 2);
-            $table->float('subtotal', 10, 2);
-            $table->float('date', 10, 2);
+            $table->smallInteger('qty');
+            $table->date('date');
             $table->timestamps();
         });
     }

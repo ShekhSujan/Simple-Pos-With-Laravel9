@@ -24,11 +24,6 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-primary" id="" data-toggle="modal"
-                                            data-target="#customModalTwoAdvice" title="New Appointments">
-                                            <i class="icon-plus"></i></span></button>
-                                    </div>
                                 </div>
                             </div>
                             <table class="table custom-table">
@@ -48,8 +43,14 @@
                                 <tfoot>
                                     <tr>
                                         <td colspan="3" class="text-right border-right">Total:</td>
-                                        <td class="border-right">Qty:<span class="total-count"></span></td>
-                                        <td colspan="2">$<span class="total-cart"></span></td>
+                                        <td class="border-right">Qty:
+                                            <span class="total-count"></span>
+                                            <input type="hidden" class="totalqty" value="" name="totalqty" />
+                                        </td>
+                                        <td colspan="2">$
+                                            <span class="total-cart"></span>
+                                            <input type="hidden" class="totalamount" value="" name="total" />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td colspan="6" class="text-right border-right">
@@ -78,7 +79,7 @@
                                 @foreach ($allMedicine as $key => $value)
                                     <tr>
                                         <td>{{ $value->title }}</td>
-                                        <td>${{ $value->unit_price }}</td>
+                                        <td>${{ $value->unit_price }} / <span class="badge badge-danger">{{ $value->stock }}</span></td>
                                         <td><a href="#" class="btn btn-primary btn-sm add-to-cart"
                                                 data-name="{{ $value->title }}" data-id='{{ $value->id }}'
                                                 data-price='{{ $value->unit_price }}'>Add</a>
@@ -93,50 +94,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table custom-table">
-                        <thead>
-                            <tr>
-                                <th data-orderable="false">SL</th>
-                                <th data-orderable="false">Med</th>
-                                <th data-orderable="false">Price</th>
-                                <th data-orderable="false">Qty</th>
-                                <th data-orderable="false">Total</th>
-                                <th data-orderable="false">Ac</th>
-                            </tr>
-                        </thead>
-                        <tbody class="show-cart">
-
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="3" class="text-right border-right">Total:</td>
-                                <td class="border-right">Qty:<span class="total-count"></span></td>
-                                <td colspan="2">$<span class="total-cart"></span></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" class="btn btn-primary">Order now</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
         // ************************************************
         // Shopping Cart API
@@ -303,22 +260,33 @@
             for (var i in cartArray) {
                 output += `<tr>
                 <td> ${j++}</td>
-                <td>${cartArray[i].name}</td>
-                <td>${cartArray[i].price}</td>
+                <td>
+                    <input type="hidden" name="id[]" value="${cartArray[i].id}"/>
+                    ${cartArray[i].name}
+                    </td>
+                <td>
+                    <input type="hidden" name="unit_price[]" value="${cartArray[i].price}"/>
+                    ${cartArray[i].price}
+                    </td>
                 <td>
                     <div class='input-group'>
                         <button class='minus-item input-group-addon btn btn-primary btn-sm' data-id=${cartArray[i].id}>-</button>
-                        <input type='number' readonly class='item-count input-sm' min='1' data-id='${cartArray[i].id}' value='${cartArray[i].count}' style='width:50px;'>
+                        <input name="qty[]" type='number' readonly class='item-count input-sm' min='1' data-id='${cartArray[i].id}' value='${cartArray[i].count}' style='width:50px;'>
                         <button class='plus-item btn btn-primary input-group-addon btn-sm' data-id=${cartArray[i].id}>+</button>
                     </div>
                 </td>
-                <td>${cartArray[i].total}</td>
+                <td>
+                    <input type="hidden" name="total_price[]" value="${cartArray[i].total}"/>
+                    ${cartArray[i].total}
+                    </td>
                 <td><button class='delete-item btn btn-danger btn-sm' data-id=${cartArray[i].id}>X</button></td>
                 </tr>`;
             }
             $('.show-cart').html(output);
             $('.total-cart').html(shoppingCart.totalCart());
             $('.total-count').html(shoppingCart.totalCount());
+            $('.totalamount').val(shoppingCart.totalCart());
+            $('.totalqty').val(shoppingCart.totalCount());
         }
 
         // Delete item button
