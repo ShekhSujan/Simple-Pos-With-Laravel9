@@ -12,7 +12,7 @@
                 <div class="card m-0">
                     <div class="card-body">
 
-                        <form  action="{{ route('order.store') }}" method="POST">
+                        <form action="{{ route('order.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <div class="input-group">
@@ -31,6 +31,7 @@
                                     <tr>
                                         <th data-orderable="false">SL</th>
                                         <th data-orderable="false">Med</th>
+                                        <th data-orderable="false">Img</th>
                                         <th data-orderable="false">Price</th>
                                         <th data-orderable="false">Qty</th>
                                         <th data-orderable="false">Total</th>
@@ -54,7 +55,8 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6" class="text-right border-right">
-                                            <button type="submit" class="btn btn-primary btn-sm" id="checkout">Checkout</button>
+                                            <button type="submit" class="btn btn-primary btn-sm"
+                                                id="checkout">Checkout</button>
                                             <button class="clear-cart btn btn-danger btn-sm">Clear Cart</button>
                                         </td>
                                     </tr>
@@ -71,6 +73,7 @@
                             <thead>
                                 <tr>
                                     <th data-orderable="false">Medicine</th>
+                                    <th data-orderable="false">Image</th>
                                     <th data-orderable="false">Price/Stock</th>
                                     <th data-orderable="false">Action</th>
                                 </tr>
@@ -79,11 +82,15 @@
                                 @foreach ($allMedicine as $key => $value)
                                     <tr>
                                         <td>{{ $value->title }}</td>
+                                        <td><img src="{{ asset("assets/images/{$loop->iteration}.jpg") }}" style="width:50px;" /></td>
                                         <td>${{ $value->unit_price }} / <span
                                                 class="badge badge-danger">{{ $value->stock }}</span></td>
-                                        <td><a href="#" class="btn btn-primary btn-sm add-to-cart"
+                                        <td>
+                                            <a href="#" class="btn btn-primary btn-sm add-to-cart"
                                                 data-name="{{ $value->title }}" data-id='{{ $value->id }}'
-                                                data-price='{{ $value->unit_price }}'>Add</a>
+                                                data-price='{{ $value->unit_price }}'
+                                                data-img="{{ asset("assets/images/{$loop->iteration}.jpg") }}">Add
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -107,10 +114,11 @@
             cart = [];
 
             // Constructor
-            function Item(id, name, price, count) {
+            function Item(id, name, price,img, count) {
                 this.id = id;
                 this.name = name;
                 this.price = price;
+                this.img = img;
                 this.count = count;
             }
 
@@ -134,7 +142,7 @@
             var obj = {};
 
             // Add to cart
-            obj.addItemToCart = function(id, name, price, count) {
+            obj.addItemToCart = function(id, name, price,img, count) {
                 for (var item in cart) {
                     if (cart[item].id === id) {
                         cart[item].count++;
@@ -142,7 +150,7 @@
                         return;
                     }
                 }
-                var item = new Item(id, name, price, count);
+                var item = new Item(id, name,price,img,count);
                 cart.push(item);
                 saveCart();
             }
@@ -242,8 +250,10 @@
             event.preventDefault();
             var id = $(this).data('id');
             var name = $(this).data('name');
+
             var price = Number($(this).data('price'));
-            shoppingCart.addItemToCart(id, name, price, 1);
+            var img = $(this).data('img');
+            shoppingCart.addItemToCart(id, name,price,img, 1);
             displayCart();
         });
 
@@ -265,6 +275,7 @@
                     <input type="hidden" name="id[]" value="${cartArray[i].id}"/>
                     ${cartArray[i].name}
                     </td>
+                    <td><img src="${cartArray[i].img}" style="width:50px;" /></td>
                 <td>
                     <input type="hidden" name="unit_price[]" value="${cartArray[i].price}"/>
                     ${cartArray[i].price}
